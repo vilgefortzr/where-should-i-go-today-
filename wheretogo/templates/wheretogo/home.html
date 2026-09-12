@@ -1,29 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Where Should I Go Today?</title>
-</head>
-<body>
-    <header>
-        <h1>Can’t decide where to eat tonight? Let us do the hard part!</h1>
-        <p>Not sure where to go for dinner tonight?</p>
-        <p>Choosing a restaurant from dozens of options can be a real challenge.
-            Our website helps you quickly find a place that suits you.
-            Tell us what you’re looking for, choose the kind of evening you want, and let us help you decide where to go.</p>
-        <p>Less time deciding — more time enjoying!</p>
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'places' %}">Places</a></li>
-                <li><a href="{% url 'add_place' %}">Add Place</a></li>
-            </ul>
-        </nav>
-    </header>
-<footer>
-        <hr>
-        <p>&copy; 2026. НаУКМА. Антоній Половко. Ніякі права не захищені.</p>
-    </footer>
-</body>
-</html>
+{% extends 'wheretogo/base.html' %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="mb-4">Can’t decide where to eat tonight?<br>Let us do the hard part!</h1>
+    <p class="lead fw-bold">Not sure where to go for dinner tonight?</p>
+    <p>Choosing a restaurant from dozens of options can be a real challenge.</p>
+    <p>Our website helps you quickly find a place that suits you.</p>
+    <p class="lead">Tell us what you’re looking for, choose the kind of evening you want, and let us help you decide where to go!</p>
+    <p class="fw-bold mb-4">Less time deciding — more time enjoying!</p>
+    <button id="btn-random" class="btn btn-info btn-lg mt-3">Where should I go today?</button>
+</div>
+<div class="mt-5 pt-4 border-top border-secondary text-start">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0">Your Places</h4>
+            <a href="{% url 'places' %}" class="text-decoration-none text-info small">See all &rarr;</a>
+        </div>
+        <div class="d-flex flex-row flex-nowrap gap-3 pb-3 overflow-auto" style="scrollbar-width: thin;">
+            {% for place in places %}
+                {% include 'wheretogo/place_preview.html' with place=place %}
+            {% empty %}
+                <div class="w-100 text-center py-5 text-secondary border border-secondary rounded">
+                    It's empty here. <a href="{% url 'add_place' %}" class="text-info text-decoration-none">Add your first place!</a>
+                </div>
+            {% endfor %}
+        </div>
+</div>
+{% endblock %}

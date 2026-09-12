@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 
 
 def home(request):
-    return render(request, 'wheretogo/home.html')
+    places_list = request.session.get('places_list', [])
+    return render(request, 'wheretogo/home.html', {'places': places_list})
 
 
 def places(request):

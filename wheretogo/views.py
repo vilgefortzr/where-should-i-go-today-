@@ -1,5 +1,5 @@
 from datetime import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 
 def home(request):
@@ -31,7 +31,8 @@ def add_place(request):
             'description': description,
             'type': place_type,
             'location': location,
-            'rating': int(rating) if rating else None
+            'rating': int(rating) if rating else None,
+            'created_at': datetime.now().strftime('%Y-%m-%d %H:%M')
         }
         places_list.append(new_place)
         request.session['places_list'] = places_list
@@ -45,3 +46,10 @@ def clear_places(request):
     request.session.modified = True
     return redirect('places')
 
+
+def place_detail(request, place_id):
+    places_list = request.session.get('places_list', [])
+    place = next((p for p in places_list if p.get('id') == place_id), None)
+    if not place:
+        return redirect('places')
+    return render(request, 'wheretogo/place_detail.html', {'place': place})

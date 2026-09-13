@@ -28,7 +28,9 @@ document.addEventListener("DOMContentLoaded", function() {
         resultDiv.innerHTML = `
             <div class="card border-info bg-dark text-light shadow-lg w-100" style="max-width: 400px;">
                 <div class="card-body">
-                    <h4 class="card-title text-info mb-2">${selectedPlace.name}</h4>
+                    <a href="/place/${selectedPlace.id}/" class="text-info text-decoration-none">
+                        <h4 class="card-title text-info mb-2">${selectedPlace.name}</h4>
+                    </a>
                     <p class="card-text text-secondary mb-3">${selectedPlace.description || ''}</p>
                     <div class="small">
                         <div class="mb-1"><strong>Type:</strong> ${selectedPlace.type || 'N/A'}</div>

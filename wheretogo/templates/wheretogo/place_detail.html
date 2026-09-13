@@ -1,0 +1,27 @@
+{% extends 'wheretogo/base.html' %}
+{% block content %}
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="card border-info bg-dark text-light shadow-lg">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=80"
+         class="card-img-top"
+         alt="Place cover"
+         style="height: 300px; object-fit: cover;">
+        <div class="card-body p-4">
+            <h2 class="text-info mb-3">{{ place.name }}</h2>
+            
+            <p class="text-secondary mb-4" style="white-space: pre-line;">
+                {{ place.description }}
+            </p>
+            
+            <div class="small mb-4">
+                <div class="mb-2"><strong>Type:</strong> {{ place.type|default:"N/A" }}</div>
+                <div class="mb-2"><strong>Location:</strong> {{ place.location|default:"Secret place👀" }}</div>
+                <div class="mb-2"><strong>Rating:</strong> ⭐ {{ place.rating|default:"N/A" }}</div>
+                <div class="text-muted"><strong>Added:</strong> {{ place.created_at|default:"N/A" }}</div>
+            </div>
+
+            <a href="{% url 'places' %}" class="btn btn-outline-light btn-sm">&larr; Back to all places</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

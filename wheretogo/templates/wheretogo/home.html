@@ -1,0 +1,35 @@
+{% extends 'wheretogo/base.html' %}
+
+{% block content %}
+    {% load static %}
+<div class="text-center mt-5 mx-auto" style="max-width: 750px;">
+    <h1 class="display-5 fw-bold mb-5">Can’t decide where to eat tonight? <br><span class="text-info">Let us do the hard part!</span></h1>
+    <p class="text-secondary mb-5"> <i>
+        Trust the magic of random choice. We'll pick a great spot from your collection.
+    </i> </p>
+    <p class="fw-bold fs-5 mb-3 text-light">Less time deciding — more time enjoying!</p>
+    <button id="btn-random" class="btn btn-info btn-lg px-5 py-3 fw-bold rounded-pill shadow-lg">
+        Where should I go today?
+    </button>
+</div>
+<div id="random-result" class="mt-4 d-flex justify-content-center">
+
+</div>
+<div class="mt-5 pt-4 border-top border-secondary text-start">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0">Your Places</h4>
+            <a href="{% url 'places' %}" class="text-decoration-none text-info small">See all &rarr;</a>
+        </div>
+        <div class="d-flex flex-row flex-nowrap gap-3 pb-3 overflow-auto" style="scrollbar-width: thin;">
+            {% for place in places %}
+                {% include 'wheretogo/place_preview.html' with place=place %}
+            {% empty %}
+                <div class="w-100 text-center py-5 text-secondary border border-secondary rounded">
+                    It's empty here. <a href="{% url 'add_place' %}" class="text-info text-decoration-none">Add your first place!</a>
+                </div>
+            {% endfor %}
+        </div>
+</div>
+{{ places|json_script:"places-data" }}
+<script src="{% static 'wheretogo/js/random.js' %}"></script>
+{% endblock %}

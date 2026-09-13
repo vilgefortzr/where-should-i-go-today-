@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 
 
@@ -37,3 +38,10 @@ def add_place(request):
         request.session.modified = True
         return redirect('places')
     return render(request, 'wheretogo/add_place.html')
+
+
+def clear_places(request):
+    request.session.pop('places_list', None)
+    request.session.modified = True
+    return redirect('places')
+

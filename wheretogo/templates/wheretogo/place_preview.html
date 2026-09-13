@@ -8,7 +8,13 @@
         <h5 class="card-title fw-bold mb-1">{{ place.name }}</h5>
 
         <p class="card-text text-secondary small flex-grow-1 mb-2">
-            {{ place.description|truncatewords:5 }}
+            {% if show_full_description %}
+                <div style="max-height: 120px; overflow-y: auto; scrollbar-width: thin; padding-right: 5px;">
+                    {{ place.description }}
+                </div>
+            {% else %}
+                {{ place.description|truncatewords:5 }}
+            {% endif %}
         </p>
         <div class="small mt-auto">
             <div class="mb-1"><strong>Type:</strong> {{ place.type|default:"N/A" }}</div>

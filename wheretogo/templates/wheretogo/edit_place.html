@@ -1,0 +1,63 @@
+{% extends 'wheretogo/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8 col-lg-6">
+        <h2 class="mb-4 border-bottom border-secondary pb-2">Edit Place</h2>
+        {% if error %}
+        <div class="alert alert-danger bg-dark text-danger border-danger shadow-sm" role="alert">
+            <strong>Oops!</strong> {{ error }}
+        </div>
+        {% endif %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="d-flex justify-content-between align-items-center alert alert-{{ message.tags }} bg-dark text-{{ message.tags }} border-{{ message.tags }} shadow-sm" role="alert">
+                    {{ message }}
+                    <a href="{% url 'places' %}" class="btn btn-success btn-sm d-flex justify-content-start">&larr; Back to all places</a>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" action="{% url 'edit_place' place.id %}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control bg-dark text-light border-secondary" id="name" name="name" value="{{ place.name }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control bg-dark text-light border-secondary" id="description" name="description" rows="3">{{ place.description }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="type" class="form-label">Type (e.g., Cafe, Restaurant, Bar)</label>
+                <input type="text" class="form-control bg-dark text-light border-secondary" id="type" name="type" value="{{ place.type }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" class="form-control bg-dark text-light border-secondary" id="location" name="location" value="{{ place.location }}" placeholder="Leave empty to keep it secret">
+            </div>
+
+            <div class="mb-4">
+                <label for="rating" class="form-label">Rating</label>
+                <select class="form-select bg-dark text-light border-secondary" id="rating" name="rating">
+                    <option value="">Select rating...</option>
+                    <option value="1" {% if place.rating == 1 %}selected{% endif %}>⭐ (1)</option>
+                    <option value="2" {% if place.rating == 2 %}selected{% endif %}>⭐⭐ (2)</option>
+                    <option value="3" {% if place.rating == 3 %}selected{% endif %}>⭐⭐⭐ (3)</option>
+                    <option value="4" {% if place.rating == 4 %}selected{% endif %}>⭐⭐⭐⭐ (4)</option>
+                    <option value="5" {% if place.rating == 5 %}selected{% endif %}>⭐⭐⭐⭐⭐ (5)</option>
+                </select>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-info fw-bold text-dark">Save Place</button>
+                <a href="{% url 'places' %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

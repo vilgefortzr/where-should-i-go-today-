@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     const placesData = JSON.parse(document.getElementById('places-data').textContent);
 

@@ -2,16 +2,19 @@
 
 {% block content %}
     {% load static %}
-<div class="text-center mt-5">
-    <h1 class="mb-4">Can’t decide where to eat tonight?<br>Let us do the hard part!</h1>
-    <p class="lead fw-bold">Not sure where to go for dinner tonight?</p>
-    <p>Choosing a restaurant from dozens of options can be a real challenge.</p>
-    <p>Our website helps you quickly find a place that suits you.</p>
-    <p class="lead">Tell us what you’re looking for, choose the kind of evening you want, and let us help you decide where to go!</p>
-    <p class="fw-bold mb-4">Less time deciding — more time enjoying!</p>
-    <button id="btn-random" class="btn btn-info btn-lg mt-3">Where should I go today?</button>
+<div class="text-center mt-5 mx-auto" style="max-width: 750px;">
+    <h1 class="display-5 fw-bold mb-5">Can’t decide where to eat tonight? <br><span class="text-info">Let us do the hard part!</span></h1>
+    <p class="text-secondary mb-5"> <i>
+        Trust the magic of random choice. We'll pick a great spot from your collection.
+    </i> </p>
+    <p class="fw-bold fs-5 mb-3 text-light">Less time deciding — more time enjoying!</p>
+    <button id="btn-random" class="btn btn-info btn-lg px-5 py-3 fw-bold rounded-pill shadow-lg">
+        Where should I go today?
+    </button>
 </div>
-<div id="random-result" class="mt-4 d-flex justify-content-center"></div>
+<div id="random-result" class="mt-4 d-flex justify-content-center">
+
+</div>
 <div class="mt-5 pt-4 border-top border-secondary text-start">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="mb-0">Your Places</h4>
